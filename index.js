@@ -7,7 +7,6 @@ import blogRouter from './routes/blogRoutes.js';
   
 const app = express();
 dotenv.config();
-dbConnection();
 
 ////// midddleware
 app.use(express.json());

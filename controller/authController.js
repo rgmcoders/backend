@@ -1,3 +1,4 @@
+import dbConnection from '../config/db.js';
 import User from '../models/User.js';
 import _sendEmail from '../utils/Email.js';
 import { signInToken } from '../utils/token.js';
@@ -8,6 +9,8 @@ export const signUp = async (req, res) => {
   console.log(">>>>> ", req.body);
 
   try {
+    await  dbConnection();
+
     const { email, password } = req.body;
     if (!email || !password) {
       res.status(400).json(
