@@ -9,6 +9,11 @@ const app = express();
 dotenv.config();
 
 
+////// midddleware
+app.use(express.json());
+app.use(cors());
+
+
 app.use(async (req, res, next) => {
     try {
         await connectDB();
@@ -19,10 +24,6 @@ app.use(async (req, res, next) => {
     }
 });
 
-
-////// midddleware
-app.use(express.json());
-app.use(cors());
 
 
 ///// routes
