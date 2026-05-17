@@ -10,20 +10,22 @@ dotenv.config();
 
 
 ////// midddleware
+app.use(cors({
+    origin: 'http://localhost:5173', // Aapka frontend origin
+    credentials: true
+}));
 app.use(express.json());
-app.use(cors());
 
-
+// 2. Database Connection Middleware (Fixed function name)
 app.use(async (req, res, next) => {
     try {
-        await connectDB();
-        next(); // Sab theek hai, agay controller par jao
+        await dbConnection(); // 👈 dbConnection use kiya jo top par imported hai
+        next(); 
     } catch (error) {
         console.error("Database connection failed in middleware:", error);
         res.status(500).json({ success: false, message: "Database connection error" });
     }
 });
-
 
 
 ///// routes
