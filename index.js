@@ -19,4 +19,8 @@ app.use(cors());
 app.use('/api/auth', authRoutes)
 app.use('/api/blog', blogRouter)
 
+app.get("",(req,res)=>{
+res.send("hello")
+})
+
 app.listen(process.env.PORT, ()=>console.log(`Server is running on port ${process.env.PORT}`));
