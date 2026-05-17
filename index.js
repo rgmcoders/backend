@@ -8,6 +8,18 @@ import blogRouter from './routes/blogRoutes.js';
 const app = express();
 dotenv.config();
 
+
+app.use(async (req, res, next) => {
+    try {
+        await connectDB();
+        next(); // Sab theek hai, agay controller par jao
+    } catch (error) {
+        console.error("Database connection failed in middleware:", error);
+        res.status(500).json({ success: false, message: "Database connection error" });
+    }
+});
+
+
 ////// midddleware
 app.use(express.json());
 app.use(cors());
