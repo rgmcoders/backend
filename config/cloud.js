@@ -3,7 +3,6 @@ import dotenv from 'dotenv'
 
 
 dotenv.config()
-console.log(process.env.CLOUD_APIKEY);
 
 const cloudinry =cloudinary.config({ 
   cloud_name: process.env.CLOUD_NAME, 
@@ -55,4 +54,21 @@ return  resolve(result)
  
   
 } 
-export {uploadImg}
+
+
+const deleteImg = async (public_id) => {
+  try {
+    if (!public_id) return null;
+    
+    // Cloudinary se image delete karne ka standard tarika
+    const result = await cloudinary.v2.uploader.destroy(public_id);
+    return result;
+  } catch (error) {
+    console.log('error in deleting img from cloudinary--->', error);
+  }
+};
+
+
+
+
+export {uploadImg, deleteImg}

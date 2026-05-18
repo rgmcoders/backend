@@ -1,7 +1,12 @@
+
+import 'dotenv/config';
 import User from '../models/User.js';
 import _sendEmail from '../utils/Email.js';
 import { signInToken } from '../utils/token.js';
 import jwt from 'jsonwebtoken';
+
+
+console.log(process.env.FRONTEND_URII);
 
 
 export const signUp = async (req, res) => {
@@ -92,11 +97,17 @@ export const forgotPswd = async (req, res) => {
       success: false,
       message: "User not found"
     })
+  }else{
+    
   }
+
+  console.log("Check Env in Controller:", process.env.FRONTEND_URL);
+  console.log("Check Env in Controller:", process.env.JWT_SECRET);
 
 /////// reset pswd token
 const resetToken = jwt.sign({id:user._id}, process.env.JWT_SECRET,{expiresIn:'1d'});
-const redirectLink = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`
+// const redirectLink = `${process.env.FRONTEND_URII}/reset-password/${resetToken}`
+const redirectLink = `http://localhost:5173/reset-password/${resetToken}`
 
 
 
